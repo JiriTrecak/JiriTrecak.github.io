@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <!--
+<div id="codesandbox" style="width:100%;height:100%;"></div>
+-->
+
+    <iframe id="codesandbox-1" style="width: 300px; height: 300px;"></iframe>
+    <iframe id="codesandbox-2" style="width: 300px; height: 300px;"></iframe>
+
+    <script src="rtcp-core-dev.js"></script>
+    <script>
+        // Create sandbox
+        const SandboxRenderer = window.sandboxRenderer;
+        const rendererInstance = new SandboxRenderer()
+
+        // Define all different situations
+        const packageJSON = `
+    {
+        "name": "supernova-live-react",
+        "version": "1.0.0",
+        "description": "React Template",
+        "keywords": ["react", "supernova"],
+        "main": "src/index.js",
+        "dependencies": {
+            "react": "17.0.2",
+            "react-dom": "17.0.2",
+            "react-scripts": "4.0.0"
+        },
+        "devDependencies": {
+            "@babel/runtime": "7.13.8",
+            "typescript": "4.1.3"
+        },
+        "scripts": {
+            "start": "react-scripts start",
+            "build": "react-scripts build",
+            "test": "react-scripts test --env=jsdom",
+            "eject": "react-scripts eject"
+        },
+        "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+    }
+    `
+
+        const code1 = `
+    export default function App() {
+        return (
+            <div className="App">
+            <h1>Sandbox 1</h1>
+            <h2>This is running react app with h1 and h2</h2>
+            </div>
+        );
+    }
+    `
+
+        const code2 = `
+    export default function App() {
+        return (
+            <div className="App">
+            <h1>Sandbox 2</h1>
+            <h2>This is running react app with h1 and h2</h2>
+            </div>
+        );
+    }
+    `
+        const encodedData1 = rendererInstance.encodeReactSandboxData(code1, packageJSON);
+        const encodedData2 = rendererInstance.encodeReactSandboxData(code2, packageJSON);
+        rendererInstance.injectSandboxDataToTarget("codesandbox-1", encodedData1)
+        rendererInstance.injectSandboxDataToTarget("codesandbox-2", encodedData2)
+
+        rendererInstance.buildSandboxesForTargetsWithIDStartingWith("codesandbox")
+    </script>
+
+</body>
+
+</html>
