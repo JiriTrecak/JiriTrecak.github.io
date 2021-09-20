@@ -104,21 +104,23 @@ export default function IconButtonSizes() {
         };
 
         // Create sandbox renderer
-        const SandboxRenderer = window.sandboxRenderer;
-        const rendererInstance = new SandboxRenderer()
+        const engine = window.sandboxEngine;
+        engine.setObserver((message) => {
+            console.log(`recieved message: ${message}`)
+        })
         const renderingTarget = "sb-target"
 
         // ---- Handling initial load of sandbox(es) ----
 
         // Inject encoded data to the iframe tag. This should be called for every iframe that was spawned
-        const encodedInitialData = getEncodedSandboxData(rendererInstance)
-        rendererInstance.setSandboxDataBeforeLoad(renderingTarget, encodedInitialData)
+        const encodedInitialData = getEncodedSandboxData(engine)
+        engine.setSandboxDataBeforeLoad(renderingTarget, encodedInitialData)
 
         // Build sandbox for specific frame. This needs to be called after setting data, before everything else.
-        rendererInstance.buildSandbox(renderingTarget)
+        engine.buildSandbox(renderingTarget)
 
-        // or build in bulk: rendererInstance.buildSandboxStartingWith(renderingTarget)
-        // or build in bulk: rendererInstance.buildSandboxEndingWith(renderingTarget)
+        // or build in bulk: engine.buildSandboxStartingWith(renderingTarget)
+        // or build in bulk: engine.buildSandboxEndingWith(renderingTarget)
 
         // ---- Updating sandbox(es) ----
 
@@ -126,10 +128,10 @@ export default function IconButtonSizes() {
         const codeUpdate = debounce(function() {
             // Update sandbox on every content change, debounced
             // We get encoded data again
-            const encodedData = getEncodedSandboxData(rendererInstance)
+            const encodedData = getEncodedSandboxData(engine)
 
             // And we update sandbox, using the ID we provided when constructing the iframe
-            rendererInstance.updateSandbox(renderingTarget, encodedData)
+            engine.updateSandbox(renderingTarget, encodedData)
         }, 1000)
 
         document.getElementById("code").addEventListener('input', function() {
