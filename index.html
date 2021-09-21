@@ -56,6 +56,16 @@ export default function IconButtonSizes() {
         </div>
     </div>
 
+    <div style="margin: 100px 16px; display: flex; flex-direction: column;">
+        <h3>Alignment</h3>
+        <input id="alignment" value="center" />
+        <h3>Background</h3>
+        <input id="background" value="" />
+        <h3>Height</h3>
+        <input id="height" value="500" />
+    </div>
+
+
     <!-- Import library -->
     <script src="rtcp-core.js"></script>
     <script>
@@ -64,10 +74,13 @@ export default function IconButtonSizes() {
             // Get code and package data, and encode the sandbox information
             const code = document.getElementById("code").value
             const package = document.getElementById("package").value
+            const alignment = document.getElementById("alignment").value
+            const height = document.getElementById("height").value
+            const background = document.getElementById("background").value
 
             // Note: This creates base64-encoded string that contains all neccessary information to render the iframe
             // Only allowed option is "react" for now, we'll add more later (angular, vue)
-            return renderer.encodeSandboxData("react", code, package)
+            return renderer.encodeSandboxData("react", code, package, height, background, alignment)
         }
 
         // Simple debounce so we are not trashing compiler
@@ -147,6 +160,15 @@ export default function IconButtonSizes() {
             codeUpdate()
         }, false);
         document.getElementById("package").addEventListener('input', function() {
+            codeUpdate()
+        }, false);
+        document.getElementById("alignment").addEventListener('input', function() {
+            codeUpdate()
+        }, false);
+        document.getElementById("height").addEventListener('input', function() {
+            codeUpdate()
+        }, false);
+        document.getElementById("background").addEventListener('input', function() {
             codeUpdate()
         }, false);
     </script>
