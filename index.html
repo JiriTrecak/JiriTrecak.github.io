@@ -25,7 +25,8 @@
     "main": "src/index.js",
     "dependencies": {
         "react-dom": "latest",
-        "react": "latest"
+        "react": "latest",
+        "@supernova-studio/private-codesandbox-package": "latest"
     },
     "devDependencies": {
         "@babel/runtime": "7.13.8",
@@ -45,11 +46,10 @@
             <h3>Code to render</h3>
             <textarea id="code" style="width: 100%; height: 100%; background-color: #fafafa; border: 1px solid #e4e4e4; padding: 16px;">
 import React from "react";
+import {Button} from "@supernova-studio/private-codesandbox-package";
 
 export default function IconButtonSizes() {
-    return (
-        <div>Content</div>
-    );
+    return <Button label="Private Button"></Button>
 }
             
             </textarea>
