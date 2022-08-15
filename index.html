@@ -67,7 +67,7 @@ export default function IconButtonSizes() {
 
 
     <!-- Import library -->
-    <script src="rtcp-core.js"></script>
+    <script src="sandbox.js"></script>
     <script>
         // Encode sandbox data from textareas providing content
         function getEncodedSandboxData(renderer) {
@@ -76,10 +76,15 @@ export default function IconButtonSizes() {
             const package = document.getElementById("package").value
             const alignment = document.getElementById("alignment").value
             const background = document.getElementById("background").value
+            const registry = {
+                enabledScopes: ['@supernova-studio/*'],
+                limitToScopes: false,
+                registryUrl: 'https://npm-proxy-dev.supernova.io/'
+            }
 
             // Note: This creates base64-encoded string that contains all neccessary information to render the iframe
             // Only allowed option is "react" for now, we'll add more later (angular, vue)
-            return renderer.encodeSandboxData("react", code, package, alignment, background)
+            return renderer.encodeSandboxData("react", code, package, alignment, background, registry)
         }
 
         function updateHeight() {
@@ -144,12 +149,14 @@ export default function IconButtonSizes() {
         const encodedInitialData = getEncodedSandboxData(engine)
         engine.setSandboxDataBeforeLoad(renderingTarget, encodedInitialData)
 
-        // Build sandbox for specific frame. This needs to be called after setting data, before everything else.
-        engine.buildSandbox(renderingTarget)
+        // Build sandboxesthat are authorized for private proxy
+        const tokenUrl = "https://supernova.dev.docs-dev.supernova.io/dark-matter/sandbox.json"
+        engine.buildSandboxesSessionAuthorized(["sb-target"], tokenUrl)
         updateHeight()
 
-        // or build in bulk: engine.buildSandboxStartingWith(renderingTarget)
-        // or build in bulk: engine.buildSandboxEndingWith(renderingTarget)
+        // You can also use search function to find all ids:
+        // let targets = engine.getSandboxTargetsStartingWith("sb-")
+        // engine.buildSandboxesSessionAuthorized(targets, tokenUrl)
 
         // ---- Updating sandbox(es) ----
 
