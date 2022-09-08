@@ -1,9 +1,49 @@
+const codeEditor = CodeMirror.fromTextArea(document.getElementById("field-code"), {
+    value: code,
+    lineNumbers: true,
+    mode: 'text/javascript',
+    theme: 'supernova',
+    styleActiveLine: { nonEmpty: true }
+});
+
+const packageEditor = CodeMirror.fromTextArea(document.getElementById("field-package"), {
+    value: code,
+    lineNumbers: true,
+    mode: 'text/javascript',
+    theme: 'supernova',
+    styleActiveLine: { nonEmpty: true }
+});
+
+const cssEditor = CodeMirror.fromTextArea(document.getElementById("field-styling"), {
+    value: code,
+    lineNumbers: true,
+    mode: 'text/javascript',
+    theme: 'supernova',
+    styleActiveLine: { nonEmpty: true }
+});
+
+cssEditor.on('change', editor => {
+    codeUpdate();
+});
+packageEditor.on('change', editor => {
+    codeUpdate();
+});
+codeEditor.on('change', editor => {
+    codeUpdate();
+});
+
+$(document).on('shown.bs.tab', null, function() {
+    codeEditor.refresh();
+    packageEditor.refresh();
+    cssEditor.refresh();
+})
+
 // Encode sandbox data from textareas providing content
 function getEncodedSandboxData(renderer) {
     // Get code and package data, and encode the sandbox information
-    const code = document.getElementById("field-code").value
-    const package = document.getElementById("field-package").value
-    const style = document.getElementById("field-styling").value
+    const code = codeEditor.doc.getValue()
+    const package = packageEditor.doc.getValue()
+    const style = cssEditor.doc.getValue()
 
     const background = document.getElementById("sb-config-background").value
     const alignment = document.getElementById("sb-config-alignment").value
@@ -59,13 +99,13 @@ engine.setObserver((message) => {
 
     switch (message.status) {
         case "done":
-            color = "d7ffe0";
+            color = "rgb(208 239 255)";
             break
         case "error":
-            color = "ffd7e0";
+            color = "rgb(255 219 238)";
             break
         default:
-            color = "fbfbfb";
+            color = "rgb(242 255 219)";
             break
     }
     element.style.backgroundColor = `#${color}`
@@ -104,18 +144,10 @@ const codeUpdate = debounce(function() {
     // And we update sandbox, using the ID we provided when constructing the iframe
     engine.updateSandbox(renderingTarget, encodedData)
     updateHeight()
+    console.log("x")
 }, 1000)
 
 // Observers for all fields
-document.getElementById("field-code").addEventListener('input', function() {
-    codeUpdate()
-}, false);
-document.getElementById("field-package").addEventListener('input', function() {
-    codeUpdate()
-}, false);
-document.getElementById("field-styling").addEventListener('input', function() {
-    codeUpdate()
-}, false);
 document.getElementById("sb-config-background").addEventListener('input', function() {
     codeUpdate()
 }, false);
