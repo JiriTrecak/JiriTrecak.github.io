@@ -88,42 +88,42 @@
 
                         <ul class="nav nav-tabs" id="sb-code-configuration" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="componentcss-tab" data-bs-toggle="tab" data-bs-target="#componentcss" type="button" role="tab" aria-controls="componentcss" aria-selected="true">component.css</button>
+                                <button class="nav-link active" id="componentscss-tab" data-bs-toggle="tab" data-bs-target="#componentscss" type="button" role="tab" aria-controls="componentscss" aria-selected="true">app.component.scss</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="componenthtml-tab" data-bs-toggle="tab" data-bs-target="#componenthtml" type="button" role="tab" aria-controls="componenthtml" aria-selected="false">component.html</button>
+                                <button class="nav-link" id="componenthtml-tab" data-bs-toggle="tab" data-bs-target="#componenthtml" type="button" role="tab" aria-controls="componenthtml" aria-selected="false">app.component.html</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="componentts-tab" data-bs-toggle="tab" data-bs-target="#componentts" type="button" role="tab" aria-controls="componentts" aria-selected="false">component.ts</button>
+                                <button class="nav-link" id="componentts-tab" data-bs-toggle="tab" data-bs-target="#componentts" type="button" role="tab" aria-controls="componentts" aria-selected="false">app.component.ts</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="modulets-tab" data-bs-toggle="tab" data-bs-target="#modulets" type="button" role="tab" aria-controls="modulets" aria-selected="false">module.ts</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="false">package.json</button>
+                                <button class="nav-link" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="false"> (global) package.json</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="stylesscss-tab" data-bs-toggle="tab" data-bs-target="#stylesscss" type="button" role="tab" aria-controls="stylesscss" aria-selected="false">(global) styles.scss</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="sb-code-configuration-tab-content">
-                            <div class="tab-pane fade show active" id="componentcss" role="tabpanel" aria-labelledby="componentcss-tab">
-                                <textarea class="form-control" id="field-componentcss" placeholder="">
-div {
-    text-align: center;
+                            <div class="tab-pane fade show active" id="componentscss" role="tabpanel" aria-labelledby="componentscss-tab">
+                                <textarea class="form-control" id="field-componentscss" placeholder="">
+.container {
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    height: 100vh;
 }     
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="componenthtml" role="tabpanel" aria-labelledby="componenthtml-tab">
                                 <textarea class="form-control" id="field-componenthtml" placeholder="">
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
-    <h1>
-    Welcome to {{ title }}!
-    </h1>
-    <img
-    width="300"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-    />
-</div>                                  
+<div class="container">
+	<button type="button" (click)="onButtonClick()" clickable>Click me</button>                        
+</div>                              
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="componentts" role="tabpanel" aria-labelledby="componentts-tab">
@@ -133,11 +133,13 @@ import { Component } from "@angular/core";
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.css"]
+    styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-    title = "CodeSandbox";
-}                           
+    onButtonClick() {
+            alert("Clicked!"); 
+    }
+}                                                                           
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="modulets" role="tabpanel" aria-labelledby="modulets-tab">
@@ -154,6 +156,38 @@ import { AppComponent } from "./app.component";
     bootstrap: [AppComponent]
 })
 export class AppModule {}                            
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="stylesscss" role="tabpanel" aria-labelledby="stylesscss-tab">
+                                <textarea class="form-control" id="field-stylesscss" placeholder="">
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($mat-green);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-dark-theme(
+    $app-primary,
+    $app-accent,
+    $app-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);                           
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="package" role="tabpanel" aria-labelledby="package-tab">
@@ -173,18 +207,21 @@ export class AppModule {}
     },
     "private": true,
     "dependencies": {
-        "@angular/animations": "^12.2.0",
-        "@angular/common": "^12.2.0",
-        "@angular/compiler": "^12.2.0",
-        "@angular/core": "^12.2.0",
-        "@angular/forms": "^12.2.0",
-        "@angular/platform-browser": "^12.2.0",
-        "@angular/platform-browser-dynamic": "^12.2.0",
-        "@angular/router": "^12.2.0",
-        "core-js": "3.8.3",
-        "rxjs": "6.6.3",
-        "tslib": "2.1.0",
-        "zone.js": "0.11.3"
+        "@angular/animations": "8.2.8",
+        "@angular/cdk": "8.2.1",
+        "@angular/common": "8.2.8",
+        "@angular/compiler": "8.2.8",
+        "@angular/core": "8.2.8",
+        "@angular/forms": "8.2.7",
+        "@angular/material": "8.2.1",
+        "@angular/platform-browser": "8.2.8",
+        "@angular/platform-browser-dynamic": "8.2.8",
+        "@angular/router": "8.2.8",
+        "core-js": "3.2.1",
+        "hammerjs": "2.0.8",
+        "rxjs": "6.5.3",
+        "rxjs-compat": "6.5.3",
+        "zone.js": "0.10.2"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.1102.0",

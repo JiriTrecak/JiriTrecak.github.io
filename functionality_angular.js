@@ -12,7 +12,7 @@ const componentTSEditor = CodeMirror.fromTextArea(document.getElementById("field
     styleActiveLine: { nonEmpty: true }
 });
 
-const componentCSSEditor = CodeMirror.fromTextArea(document.getElementById("field-componentcss"), {
+const componentSCSSEditor = CodeMirror.fromTextArea(document.getElementById("field-componentscss"), {
     lineNumbers: true,
     mode: 'text/javascript',
     theme: 'supernova',
@@ -33,18 +33,27 @@ const packageEditor = CodeMirror.fromTextArea(document.getElementById("field-pac
     styleActiveLine: { nonEmpty: true }
 });
 
+const stylesSCSSEditor = CodeMirror.fromTextArea(document.getElementById("field-stylesscss"), {
+    lineNumbers: true,
+    mode: 'text/javascript',
+    theme: 'supernova',
+    styleActiveLine: { nonEmpty: true }
+});
+
 componentHTMLEditor.on('change', editor => { codeUpdate(); });
 componentTSEditor.on('change', editor => { codeUpdate(); });
-componentCSSEditor.on('change', editor => { codeUpdate(); });
+componentSCSSEditor.on('change', editor => { codeUpdate(); });
 moduleTSEditor.on('change', editor => { codeUpdate(); });
 packageEditor.on('change', editor => { codeUpdate(); });
+stylesSCSSEditor.on('change', editor => { codeUpdate(); });
 
 $(document).on('shown.bs.tab', null, function() {
     componentHTMLEditor.refresh();
     componentTSEditor.refresh();
-    componentCSSEditor.refresh();
+    componentSCSSEditor.refresh();
     moduleTSEditor.refresh();
     packageEditor.refresh();
+    stylesSCSSEditor.refresh();
 })
 
 // Encode sandbox data from textareas providing content
@@ -52,9 +61,10 @@ function getEncodedSandboxData(renderer) {
     // Get code and package data, and encode the sandbox information
     const componentHTML = componentHTMLEditor.doc.getValue()
     const componentTS = componentTSEditor.doc.getValue()
-    const componentCSS = componentCSSEditor.doc.getValue()
+    const componentSCSS = componentSCSSEditor.doc.getValue()
     const moduleTS = moduleTSEditor.doc.getValue()
     const package = packageEditor.doc.getValue()
+    const stylesSCSS = stylesSCSSEditor.doc.getValue()
 
     const background = document.getElementById("sb-config-background").value
     const alignment = document.getElementById("sb-config-alignment").value
@@ -70,11 +80,12 @@ function getEncodedSandboxData(renderer) {
 
     // Sandbox code setup
     const files = {
-        componentCSS: componentCSS,
+        componentSCSS: componentSCSS,
         componentHTML: componentHTML,
         componentTS: componentTS,
         moduleTS: moduleTS,
-        package: package
+        package: package,
+        stylesSCSS: stylesSCSS
     }
 
     // Visual configuration of the sandbox
