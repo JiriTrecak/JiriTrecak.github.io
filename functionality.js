@@ -49,6 +49,7 @@ function getEncodedSandboxData(renderer) {
     const alignment = document.getElementById("sb-config-alignment").value
     const padding = document.getElementById("sb-config-padding").value
 
+    // NPM registry configuration
     const registry = {
         enabledScopes: ['@supernova-studio/*'],
         limitToScopes: false,
@@ -56,9 +57,23 @@ function getEncodedSandboxData(renderer) {
         proxyUrl: 'https://npm-proxy-dev.supernova.io/'
     }
 
+    // Sandbox code setup
+    const files = {
+        package: package,
+        code: code,
+        styling: style
+    }
+
+    // Visual configuration of the sandbox
+    const visual = {
+        visual: alignment,
+        backgroundColor: background,
+        padding: padding
+    }
+
     // Note: This creates base64-encoded string that contains all neccessary information to render the iframe
     // Only allowed option is "react" for now, we'll add more later (angular, vue)
-    return renderer.encodeSandboxData("react", code, package, style, alignment, background, padding, registry)
+    return renderer.encodeSandboxData("react", files, visual, registry)
 }
 
 function updateHeight() {
@@ -144,7 +159,6 @@ const codeUpdate = debounce(function() {
     // And we update sandbox, using the ID we provided when constructing the iframe
     engine.updateSandbox(renderingTarget, encodedData)
     updateHeight()
-    console.log("x")
 }, 1000)
 
 // Observers for all fields
