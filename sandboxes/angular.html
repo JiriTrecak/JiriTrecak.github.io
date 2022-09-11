@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>React Sandbox</title>
+    <title>Angular Sandbox</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <meta name="theme-color" content="#712cf9">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js" integrity="sha512-3S64QagKiTlNjSfuh3UYtYSkP494WHoWc96YvbmB2BReHpNtxlrMNY6MbJLDpavcgD8Pj5p44F/PY586uVO5iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -22,12 +22,21 @@
 
     <div class="container">
         <main>
-            <div class="py-5 text-center">
+            <div class="py-2 text-center">
+                Available sandboxes:
+                <a href="react.html">React</a> |
+                <a href="angular.html">Angular</a> |
+                <a href="vue.html">Vue</a> |
+                <a href="nextjs.html">Next.js</a> |
+                <a href="svelte.html">Svelte</a> |
+                <a href="vanilla.html">Vanilla</a>
+            </div>
+            <div class="py-2 text-center">
                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                     <i class="bi bi-code"></i>
                 </div>
-                <h2>React Sandbox</h2>
-                <p class="lead">Below is fully working live component sandbox for React.<br />You can use it by providing package.json, code you want to render and any styles you want to append to the rendered results.</p>
+                <h2>Angular Sandbox</h2>
+                <p class="lead">Below is fully working live component sandbox for Angular.<br />You can use it by providing package.json, code and template you want to render and any styles you want to append to the rendered results.</p>
             </div>
 
             <div class="row g-5">
@@ -79,61 +88,126 @@
 
                         <ul class="nav nav-tabs" id="sb-code-configuration" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="code-tab" data-bs-toggle="tab" data-bs-target="#code" type="button" role="tab" aria-controls="code" aria-selected="true">Code</button>
+                                <button class="nav-link active" id="componentcss-tab" data-bs-toggle="tab" data-bs-target="#componentcss" type="button" role="tab" aria-controls="componentcss" aria-selected="true">component.css</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="false">Package.json</button>
+                                <button class="nav-link" id="componenthtml-tab" data-bs-toggle="tab" data-bs-target="#componenthtml" type="button" role="tab" aria-controls="componenthtml" aria-selected="false">component.html</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="styling-tab" data-bs-toggle="tab" data-bs-target="#styling" type="button" role="tab" aria-controls="styling" aria-selected="false">Styles</button>
+                                <button class="nav-link" id="componentts-tab" data-bs-toggle="tab" data-bs-target="#componentts" type="button" role="tab" aria-controls="componentts" aria-selected="false">component.ts</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="modulets-tab" data-bs-toggle="tab" data-bs-target="#modulets" type="button" role="tab" aria-controls="modulets" aria-selected="false">module.ts</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="false">package.json</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="sb-code-configuration-tab-content">
-                            <div class="tab-pane fade show active" id="code" role="tabpanel" aria-labelledby="code-tab">
-                                <textarea class="form-control" id="field-code" placeholder="">
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+                            <div class="tab-pane fade show active" id="componentcss" role="tabpanel" aria-labelledby="componentcss-tab">
+                                <textarea class="form-control" id="field-componentcss" placeholder="">
+div {
+    text-align: center;
+}     
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="componenthtml" role="tabpanel" aria-labelledby="componenthtml-tab">
+                                <textarea class="form-control" id="field-componenthtml" placeholder="">
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+    <h1>
+    Welcome to {{ title }}!
+    </h1>
+    <img
+    width="300"
+    alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    />
+</div>                                  
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="componentts" role="tabpanel" aria-labelledby="componentts-tab">
+                                <textarea class="form-control" id="field-componentts" placeholder="">
+import { Component } from "@angular/core";
 
-export default function Component() {
-    const [value, onChange] = useState(new Date());
+@Component({
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"]
+})
+export class AppComponent {
+    title = "CodeSandbox";
+}                           
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="modulets" role="tabpanel" aria-labelledby="modulets-tab">
+                                <textarea class="form-control" id="field-modulets" placeholder="">
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-    return (
-    <div>
-        <Calendar onChange={onChange} value={value} />
-    </div>
-    );
-}
+import { AppComponent } from "./app.component";
+
+@NgModule({
+    declarations: [AppComponent],
+    imports: [BrowserModule],
+    providers: [],
+    bootstrap: [AppComponent]
+})
+export class AppModule {}                            
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="package" role="tabpanel" aria-labelledby="package-tab">
                                 <textarea class="form-control" id="field-package" placeholder="">
 {
-    "name": "supernova-react-sandbox",
+    "name": "supernova-angular-sandbox",
     "version": "1.0.0",
-    "description": "Supernova-React Live Sandbox",
-    "keywords": ["react", "sandbox", "supernova"],
-    "main": "src/index.js",
-    "dependencies": {
-        "react-dom": "latest",
-        "react": "latest",
-        "react-calendar": "latest"
-    },
-    "devDependencies": {},
+    "description": "Supernova-Angular Live Sandbox",
+    "keywords": ["angular", "sandbox", "supernova"],
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build"
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build --prod",
+        "test": "ng test",
+        "lint": "ng lint",
+        "e2e": "ng e2e"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^12.2.0",
+        "@angular/common": "^12.2.0",
+        "@angular/compiler": "^12.2.0",
+        "@angular/core": "^12.2.0",
+        "@angular/forms": "^12.2.0",
+        "@angular/platform-browser": "^12.2.0",
+        "@angular/platform-browser-dynamic": "^12.2.0",
+        "@angular/router": "^12.2.0",
+        "core-js": "3.8.3",
+        "rxjs": "6.6.3",
+        "tslib": "2.1.0",
+        "zone.js": "0.11.3"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^0.1102.0",
+        "@angular/cli": "^12.2.0",
+        "@angular/compiler-cli": "^12.2.0",
+        "@angular/language-service": "^12.2.0",
+        "@types/jasmine": "3.6.3",
+        "@types/jasminewd2": "2.0.8",
+        "@types/node": "14.14.28",
+        "codelyzer": "6.0.1",
+        "jasmine-core": "3.6.0",
+        "jasmine-spec-reporter": "6.0.0",
+        "karma": "6.1.1",
+        "karma-chrome-launcher": "3.1.0",
+        "karma-coverage-istanbul-reporter": "3.0.3",
+        "karma-jasmine": "4.0.1",
+        "karma-jasmine-html-reporter": "1.5.4",
+        "protractor": "7.0.0",
+        "ts-node": "9.1.1",
+        "tslint": "~6.1.3",
+        "typescript": "4.1.5"
     }
-}                                    
-                                </textarea>
-                            </div>
-                            <div class="tab-pane fade" id="styling" role="tabpanel" aria-labelledby="styling-tab">
-                                <textarea class="form-control" id="field-styling" placeholder="">
-.sandbox {
-    font-family: sans-serif;
-    text-align: center;
-    background: #ffffff,
-}                                  
+}                        
                                 </textarea>
                             </div>
                         </div>
@@ -150,8 +224,8 @@ export default function Component() {
     <script src="https://cdn.jsdelivr.net/npm/hotkeys-js@3.7.3/dist/hotkeys.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <script src="sandbox.js"></script>
-    <script src="functionality.js"></script>
+    <script src="../sandbox.js"></script>
+    <script src="../functionality_angular.js"></script>
 </body>
 
 </html>

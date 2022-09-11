@@ -1,5 +1,4 @@
 const codeEditor = CodeMirror.fromTextArea(document.getElementById("field-code"), {
-    value: code,
     lineNumbers: true,
     mode: 'text/javascript',
     theme: 'supernova',
@@ -7,7 +6,6 @@ const codeEditor = CodeMirror.fromTextArea(document.getElementById("field-code")
 });
 
 const packageEditor = CodeMirror.fromTextArea(document.getElementById("field-package"), {
-    value: code,
     lineNumbers: true,
     mode: 'text/javascript',
     theme: 'supernova',
@@ -15,7 +13,6 @@ const packageEditor = CodeMirror.fromTextArea(document.getElementById("field-pac
 });
 
 const cssEditor = CodeMirror.fromTextArea(document.getElementById("field-styling"), {
-    value: code,
     lineNumbers: true,
     mode: 'text/javascript',
     theme: 'supernova',
@@ -139,14 +136,8 @@ const encodedInitialData = getEncodedSandboxData(engine)
 engine.setSandboxDataBeforeLoad(renderingTarget, encodedInitialData)
 
 // Build sandboxesthat are authorized for private proxy
-// const tokenUrl = "https://supernova.dev.docs-dev.supernova.io/dark-matter/sandbox.json"
-// engine.buildSandboxesSessionAuthorized(["sb-target"], tokenUrl)
 engine.buildSandboxesAnonymous(["sb-target"])
 updateHeight()
-
-// You can also use search function to find all ids:
-// let targets = engine.getSandboxTargetsStartingWith("sb-")
-// engine.buildSandboxesSessionAuthorized(targets, tokenUrl)
 
 // ---- Updating sandbox(es) ----
 

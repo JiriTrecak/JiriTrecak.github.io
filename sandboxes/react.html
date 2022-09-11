@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React Sandbox</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../styles.css">
+    <meta name="theme-color" content="#712cf9">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js" integrity="sha512-3S64QagKiTlNjSfuh3UYtYSkP494WHoWc96YvbmB2BReHpNtxlrMNY6MbJLDpavcgD8Pj5p44F/PY586uVO5iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/javascript/javascript.min.js" integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/xml/xml.min.js" integrity="sha512-LarNmzVokUmcA7aUDtqZ6oTS+YXmUKzpGdm8DxC46A6AHu+PQiYCUlwEGWidjVYMo/QXZMFMIadZtrkfApYp/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/jsx/jsx.min.js" integrity="sha512-+0Bk5jqcZFYMi5WaRZaTboF7s25sht/1pxmg3sXqWDeidrrw1yRqDzF25jsMOnToR8iXSqzrHfAD5wiDO1lwSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://codemirror.net/5/lib/codemirror.css" />
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <main>
+            <div class="py-2 text-center">
+                Available sandboxes:
+                <a href="react.html">React</a> |
+                <a href="angular.html">Angular</a> |
+                <a href="vue.html">Vue</a> |
+                <a href="nextjs.html">Next.js</a> |
+                <a href="svelte.html">Svelte</a> |
+                <a href="vanilla.html">Vanilla</a>
+            </div>
+            <div class="py-2 text-center">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <i class="bi bi-code"></i>
+                </div>
+                <h2>React Sandbox</h2>
+                <p class="lead">Below is fully working live component sandbox for React.<br />You can use it by providing package.json, code you want to render and any styles you want to append to the rendered results.</p>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Visual Options</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <div class="col-12">
+                            <label for="sb-config-alignment" class="form-label">Alignment</label>
+                            <select class="form-select" id="sb-config-alignment" value="center">
+                                <option value="center" selected>Center</option>
+                                <option value="left">Left</option>
+                                <option value="right">Right</option>
+                            </select>
+                        </div>
+                    </ul>
+                    <ul class="list-group mb-3">
+                        <div class="col-12">
+                            <label for="sb-config-background" class="form-label">Background</label>
+                            <input type="text" class="form-control" id="sb-config-background" placeholder="ffffff" value="ffffff">
+                        </div>
+                    </ul>
+                    <ul class="list-group mb-3">
+                        <div class="col-12">
+                            <label for="sb-config-height" class="form-label">Height</label>
+                            <input type="text" class="form-control" id="sb-config-height" placeholder="350px" value="350px">
+                        </div>
+                    </ul>
+                    <ul class="list-group mb-3">
+                        <div class="col-12">
+                            <label for="sb-config-padding" class="form-label">Edge inset</label>
+                            <input type="text" class="form-control" id="sb-config-padding" placeholder="20px" value="20px">
+                        </div>
+                    </ul>
+                </div>
+                <div class="col-md-7 col-lg-8">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div id="sb-container" style="width: 100%; height: 300px; background-color: #fafafa; border: 1px solid #e4e4e4;">
+                                    <iframe id="sb-target" style="width: 100%; height: 100%; background-color: transparent"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="status" style="width: 100%;border: 1px solid rgb(232, 232, 232);background-color: rgb(217 233 255);border-radius: 8px;display: flex;align-content: center;align-items: center;padding: 4px 12px;font-size: 11px;margin: 20px 0px;height: 30px;">Status: done</div>
+                        <hr class="my-4">
+
+                        <ul class="nav nav-tabs" id="sb-code-configuration" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="code-tab" data-bs-toggle="tab" data-bs-target="#code" type="button" role="tab" aria-controls="code" aria-selected="true">Code</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="false">Package.json</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="styling-tab" data-bs-toggle="tab" data-bs-target="#styling" type="button" role="tab" aria-controls="styling" aria-selected="false">Styles</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="sb-code-configuration-tab-content">
+                            <div class="tab-pane fade show active" id="code" role="tabpanel" aria-labelledby="code-tab">
+                                <textarea class="form-control" id="field-code" placeholder="">
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
+export default function Component() {
+    const [value, onChange] = useState(new Date());
+
+    return (
+    <div>
+        <Calendar onChange={onChange} value={value} />
+    </div>
+    );
+}
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="package" role="tabpanel" aria-labelledby="package-tab">
+                                <textarea class="form-control" id="field-package" placeholder="">
+{
+    "name": "supernova-react-sandbox",
+    "version": "1.0.0",
+    "description": "Supernova-React Live Sandbox",
+    "keywords": ["react", "sandbox", "supernova"],
+    "main": "src/index.js",
+    "dependencies": {
+        "react-dom": "latest",
+        "react": "latest",
+        "react-calendar": "latest"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build"
+    }
+}                                    
+                                </textarea>
+                            </div>
+                            <div class="tab-pane fade" id="styling" role="tabpanel" aria-labelledby="styling-tab">
+                                <textarea class="form-control" id="field-styling" placeholder="">
+.sandbox {
+    font-family: sans-serif;
+    text-align: center;
+    background: #ffffff;
+}                                  
+                                </textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">🔮 Jiri's magical playground 🔮 <br />Making awesome things one mana shard at the time</p>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hotkeys-js@3.7.3/dist/hotkeys.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="../sandbox.js"></script>
+    <script src="../functionality_react.js"></script>
+</body>
+
+</html>
