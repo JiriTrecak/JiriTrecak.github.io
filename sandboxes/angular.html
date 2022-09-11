@@ -111,19 +111,22 @@
                                 <textarea class="form-control" id="field-componentscss" placeholder="">
 .container {
     display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 100vh;
 }     
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="componenthtml" role="tabpanel" aria-labelledby="componenthtml-tab">
                                 <textarea class="form-control" id="field-componenthtml" placeholder="">
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-	<button type="button" (click)="onButtonClick()" clickable>Click me</button>                        
-</div>                              
+    <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="primary" selected>Primary Tag</mat-chip>
+        <mat-chip color="accent" selected>Accent Tag</mat-chip>
+        <mat-chip>Unstyled Tag</mat-chip>
+    </mat-chip-list>
+</div>                            
                                 </textarea>
                             </div>
                             <div class="tab-pane fade" id="componentts" role="tabpanel" aria-labelledby="componentts-tab">
@@ -137,7 +140,7 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
     onButtonClick() {
-            alert("Clicked!"); 
+        alert("Clicked!"); 
     }
 }                                                                           
                                 </textarea>
@@ -146,12 +149,13 @@ export class AppComponent {
                                 <textarea class="form-control" id="field-modulets" placeholder="">
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import {MatChipsModule} from '@angular/material/chips';
 
 import { AppComponent } from "./app.component";
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule],
+    imports: [BrowserModule, MatChipsModule],
     providers: [],
     bootstrap: [AppComponent]
 })
@@ -160,24 +164,18 @@ export class AppModule {}
                             </div>
                             <div class="tab-pane fade" id="stylesscss" role="tabpanel" aria-labelledby="stylesscss-tab">
                                 <textarea class="form-control" id="field-stylesscss" placeholder="">
+// All improts
 @import "~@angular/material/theming";
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+// Include the common styles for Angular Material
 @include mat-core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
+// Define the palettes for Material theme
 $app-primary: mat-palette($mat-green);
 $app-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $app-warn: mat-palette($mat-red);
 
-// Create the theme object (a Sass map containing all of the palettes).
+// Create material theme
 $app-theme: mat-dark-theme(
     $app-primary,
     $app-accent,
